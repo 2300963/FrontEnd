@@ -39,4 +39,5 @@ document.getElementById('signup-form').addEventListener('submit', (e) => {
     e.preventDefault();
     alert("Account created successfully! Now try logging in.");
     switchTab('login');
+    
 });
