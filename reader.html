@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meter Reader Dashboard</title>
+    <style>
+        /* Mobile-First Styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .app-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 20px;
+        }
+
+        .user-info { font-weight: bold; color: #374151; }
+
+        .logout-btn {
+            background: #fee2e2;
+            color: #ef4444;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .task-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h2 { margin-top: 0; color: #111827; font-size: 1.2rem; }
+        
+        .address { color: #6b7280; margin-bottom: 15px; display: block; }
+
+        .input-group { margin-bottom: 15px; }
+
+        label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #4b5563; }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            box-sizing: border-box; /* Prevents input from overflowing */
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .submit-btn:active { background: #1d4ed8; transform: scale(0.98); }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <span class="user-info">Reader: Lenard</span>
+            <button class="logout-btn" onclick="location.href='index.html'">Logout</button>
+        </header>
+
+        <div class="task-card">
+            <h2>Current Reading</h2>
+            <span class="address">📍 742 Evergreen Terrace</span>
+            
+            <div class="input-group">
+                <label>Previous: 1,240 kWh</label>
+                <input type="number" id="reading" placeholder="Enter current digits">
+            </div>
+
+            <button class="submit-btn" onclick="submitData()">Submit to Bookkeeper</button>
+        </div>
+    </div>
+
+    <script>
+        function submitData() {
+            const val = document.getElementById('reading').value;
+            if(!val) return alert("Please enter a reading!");
+            
+            alert("Reading submitted: " + val + " kWh. Sending to Bookkeeper...");
+            // Logic for storage will go here
+        }
+    </script>
+</body>
+</html>

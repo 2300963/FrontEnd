@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utility Management - Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">        
+            <div class="tab-box">
+                <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+                <button class="tab-btn" id="signup-tab-btn" onclick="switchTab('signup')">Sign Up</button>
+            </div>
+
+            <form id="login-form" class="auth-form">
+                <h2>Welcome Back</h2>
+                <input type="email" placeholder="Email Address" required>
+                <input type="password" placeholder="Password" required>
+                <select id="login-role">
+                    <option value="reader">Meter Reader</option>
+                    <option value="bookkeeper">Book Keeper</option>
+                    <option value="admin">Administrator</option>
+                </select>
+                <button type="submit" class="submit-btn">Enter Dashboard</button>
+            </form>
+
+            <form id="signup-form" class="auth-form hidden">
+                <h2>Create Account</h2>
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <input type="password" placeholder="Create Password" required>
+                <select id="signup-role">
+                    <option value="reader">Meter Reader</option>
+                    <option value="bookkeeper">Book Keeper</option>
+                </select>
+                <p class="admin-note">* Administrators must be registered by the system owner.</p>
+                <button type="submit" class="submit-btn">Register</button>
+            </form>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
