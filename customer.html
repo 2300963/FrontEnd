@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Directory - UtilityPay</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body">
+
+    <nav class="navbar">
+        <div class="logo">UtilityPay <span>Bookkeeper</span></div>
+        <div class="nav-links">
+            <a href="bookkeeper.html">Billing Logs</a>
+            <a href="invoices-list.html">Invoices</a>
+            <a href="customers.html" class="active">Customers</a>
+            <a href="index.html" class="logout-link">Logout</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-container">
+        <header class="content-header">
+            <h1>Customer Directory</h1>
+            <button id="addCustBtn" class="submit-btn" style="width: auto; padding: 10px 20px;">+ Add New Customer</button>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="custSearch" class="search-input" placeholder="🔍 Search Dog Tag, Name, or Unit...">
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Resident ID</th>
+                        <th>Unit #</th>
+                        <th>Full Name</th>
+                        <th>Contact</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="customer-table-body">
+                    <tr>
+                        <td><span class="dog-tag">DT-101</span></td>
+                        <td>Unit 101</td>
+                        <td>Juan Dela Cruz</td>
+                        <td>0912-345-6789</td>
+                        <td><button class="view-btn">Edit</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="custModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>Add New Resident</h2>
+            <form id="add-cust-form">
+                <div class="form-group"><label>Full Name</label><input type="text" id="n" required></div>
+                <div class="form-group"><label>Unit #</label><input type="text" id="u" required></div>
+                <div class="form-group"><label>Dog Tag ID</label><input type="text" id="d" placeholder="e.g. DT-105" required></div>
+                <div class="modal-footer">
+                    <button type="button" class="cancel-btn" id="closeC">Cancel</button>
+                    <button type="submit" class="submit-btn">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('custModal');
+        const search = document.getElementById('custSearch');
+        
+        // Search
+        search.onkeyup = () => {
+            const filter = search.value.toLowerCase();
+            const rows = document.querySelectorAll('#customer-table-body tr');
+            rows.forEach(r => r.style.display = r.textContent.toLowerCase().includes(filter) ? '' : 'none');
+        };
+
+        // Modal Logic
+        document.getElementById('addCustBtn').onclick = () => modal.classList.remove('hidden');
+        document.getElementById('closeC').onclick = () => modal.classList.add('hidden');
+        
+        document.getElementById('add-cust-form').onsubmit = (e) => {
+            e.preventDefault();
+            const name = document.getElementById('n').value;
+            const unit = document.getElementById('u').value;
+            const tag = document.getElementById('d').value;
+            const row = document.createElement('tr');
+            row.innerHTML = `<td><span class="dog-tag">${tag}</span></td><td>${unit}</td><td>${name}</td><td>N/A</td><td><button class="view-btn">Edit</button></td>`;
+            document.getElementById('customer-table-body').prepend(row);
+            modal.classList.add('hidden');
+        };
+    </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-// Tab Switching Logic (Keep this from before)
+// Tab Switching Logic
 function switchTab(type) {
     const loginForm = document.getElementById('login-form');
     const signupForm = document.getElementById('signup-form');
@@ -17,14 +17,11 @@ function switchTab(type) {
     }
 }
 
-// Updated Login Logic - THIS IS WHERE THE REDIRECTION HAPPENS
+// Login Logic - Role Redirection
 document.getElementById('login-form').addEventListener('submit', (e) => {
     e.preventDefault();
-    
-    // Capture the role selected in the dropdown
     const role = document.getElementById('login-role').value;
     
-    // Redirect based on role
     if (role === 'admin') {
         window.location.href = 'admin.html';
     } else if (role === 'reader') {
@@ -34,10 +31,18 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
     }
 });
 
-// Sign Up Logic
+// Sign Up Logic - Password Validation
 document.getElementById('signup-form').addEventListener('submit', (e) => {
     e.preventDefault();
+    
+    const pass = document.getElementById('signup-password').value;
+    const confirmPass = document.getElementById('signup-confirm-password').value;
+    
+    if (pass !== confirmPass) {
+        alert("❌ Passwords do not match! Please try again.");
+        return; 
+    }
+
     alert("Account created successfully! Now try logging in.");
     switchTab('login');
-    
 });

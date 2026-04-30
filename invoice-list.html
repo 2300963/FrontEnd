@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Invoices - UtilityPay</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body">
+
+    <nav class="navbar">
+        <div class="logo">UtilityPay <span>Bookkeeper</span></div>
+        <div class="nav-links">
+            <a href="bookkeeper.html">Billing Logs</a>
+            <a href="invoices-list.html" class="active">Invoices</a>
+            <a href="customers.html">Customers</a>
+            <a href="index.html" class="logout-link">Logout</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-container">
+        <header class="content-header"><h1>Master Invoice List</h1></header>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>Invoice #</th><th>Customer</th><th>Date</th><th>Total</th><th>Action</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>INV-001</td>
+                        <td>Juan Dela Cruz</td>
+                        <td>2024-03-15</td>
+                        <td>₱850.00</td>
+                        <td><button class="view-btn" onclick="location.href='invoice.html?customer=Juan Dela Cruz&reading=1450&rate=12.50&total=850.00'">Open</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

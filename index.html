@@ -28,19 +28,14 @@
 
             <form id="signup-form" class="auth-form hidden">
                 <h2>Create Account</h2>
-                <label for="fullName-input">
-
-                </label>
-                
                 <input type="text" name="fullname" id="fullName-input" placeholder="Full Name" required>
                 <input type="email" name="email" id="email-input" placeholder="Email" required>
-                <input type="password" name="create-password" id="create-password-input" placeholder="Create Password" required>
-                <input type="password" name="confirm-password" id="confirm-password-input" placeholder="Confirm Password" required>
+                <input type="password" id="signup-password" placeholder="Create Password" required>
+                <input type="password" id="signup-confirm-password" placeholder="Confirm Password" required>
                 <select id="signup-role">
                     <option value="reader">Meter Reader</option>
                     <option value="bookkeeper">Book Keeper</option>
                 </select>
-                
                 <button type="submit" class="submit-btn">Register</button>
             </form>
         </div>

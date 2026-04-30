@@ -1,8 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<body>
-    <h1>Bookkeeper Dashboard</h1>
-    <p>Billing and Invoice logs go here.</p>
-    <a href="index.html">Logout</a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookkeeper Dashboard - UtilityPay</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body">
+
+    <nav class="navbar">
+        <div class="logo">UtilityPay <span>Bookkeeper</span></div>
+        <div class="nav-links">
+            <a href="bookkeeper.html" class="active">Billing Logs</a>
+            <a href="invoices-list.html">Invoices</a>
+            <a href="customers.html">Customers</a>
+            <a href="index.html" class="logout-link">Logout</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-container">
+        <header class="content-header">
+            <h1>Billing & Invoice Logs</h1>
+            <button id="openModalBtn" class="submit-btn" style="width: auto; padding: 10px 20px;">+ Create New Bill</button>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="logSearch" class="search-input" placeholder="🔍 Search by Resident ID (Dog Tag), Name, or Unit...">
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dog Tag</th>
+                        <th>Date</th>
+                        <th>Customer Name</th>
+                        <th>Reading</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="billing-table-body">
+                    <tr>
+                        <td><span class="dog-tag">DT-101</span></td>
+                        <td>2024-03-15</td>
+                        <td>Juan Dela Cruz</td>
+                        <td>1450 m³</td>
+                        <td>₱850.00</td>
+                        <td><span class="status-paid">Paid</span></td>
+                        <td><button class="view-btn" onclick="viewInvoice('Juan Dela Cruz', '1450', '12.50', '850.00')">View</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="billModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Generate New Bill</h2>
+            </div>
+            <form id="create-bill-form">
+                <div class="form-group">
+                    <label>Select Customer</label>
+                    <select id="bill-customer" required>
+                        <option value="Juan Dela Cruz">Juan Dela Cruz (DT-101)</option>
+                        <option value="Maria Clara">Maria Clara (DT-102)</option>
+                        <option value="Rizal Mercado">Rizal Mercado (DT-103)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Current Reading (m³)</label>
+                    <input type="number" id="bill-reading" required>
+                </div>
+                <div class="form-group">
+                    <label>Rate per m³ (₱)</label>
+                    <input type="number" id="bill-rate" value="12.50" step="0.01">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="submit-btn">Generate Invoice</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="bookkeeper.js"></script>
 </body>
 </html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - UtilityPay</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .invoice-box { background: white; padding: 40px; border: 1px solid #eee; max-width: 800px; margin: 2rem auto; }
+        .inv-header { display: flex; justify-content: space-between; border-bottom: 2px solid #2563eb; padding-bottom: 20px; margin-bottom: 20px; }
+        @media print { .no-print { display: none; } .invoice-box { border: none; box-shadow: none; margin: 0; } }
+    </style>
+</head>
+<body class="dashboard-body">
+    <nav class="navbar no-print">
+        <div class="logo">UtilityPay</div>
+        <div class="nav-links"><a href="bookkeeper.html">Back</a></div>
+    </nav>
+    <div class="invoice-box">
+        <div class="inv-header">
+            <div><h1>INVOICE</h1><p>Ms. Merlyn's Services</p></div>
+            <div><p><strong>Date:</strong> <span id="dt"></span></p></div>
+        </div>
+        <h3>Billed To: <span id="cn"></span></h3>
+        <table style="width:100%; border-collapse:collapse; margin-top:20px;">
+            <thead style="background:#f1f5f9;"><tr><th>Usage</th><th>Reading</th><th>Rate</th><th>Total</th></tr></thead>
+            <tbody><tr><td>Water</td><td id="rd"></td><td id="rt"></td><td id="tt"></td></tr></tbody>
+        </table>
+        <h2 style="text-align:right;">Total: <span id="ft" style="color:#2563eb;"></span></h2>
+    </div>
+    <div style="text-align:center" class="no-print"><button class="submit-btn" onclick="window.print()">Print</button></div>
+    <script>
+        const p = new URLSearchParams(window.location.search);
+        document.getElementById('cn').innerText = p.get('customer');
+        document.getElementById('rd').innerText = p.get('reading') + " m³";
+        document.getElementById('rt').innerText = "₱" + p.get('rate');
+        document.getElementById('tt').innerText = "₱" + p.get('total');
+        document.getElementById('ft').innerText = "₱" + p.get('total');
+        document.getElementById('dt').innerText = new Date().toLocaleDateString();
+    </script>
+</body>
+</html>
