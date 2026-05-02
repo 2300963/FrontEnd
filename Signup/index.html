@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Utility Management - Portal</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="signup.css">
 </head>
 <body>
     <div class="container">
         <div class="form-container">        
             <div class="tab-box">
-                <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+                <button class="tab-btn active" id="login-tab-btn" onclick="switchTab('login')">Login</button>
                 <button class="tab-btn" id="signup-tab-btn" onclick="switchTab('signup')">Sign Up</button>
             </div>
 
             <form id="login-form" class="auth-form">
                 <h2>Welcome Back</h2>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Password" required>
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-pass" placeholder="Password" required>
                 <select id="login-role">
                     <option value="reader">Meter Reader</option>
                     <option value="bookkeeper">Book Keeper</option>
@@ -28,8 +28,8 @@
 
             <form id="signup-form" class="auth-form hidden">
                 <h2>Create Account</h2>
-                <input type="text" name="fullname" id="fullName-input" placeholder="Full Name" required>
-                <input type="email" name="email" id="email-input" placeholder="Email" required>
+                <input type="text" id="fullName-input" placeholder="Full Name" required>
+                <input type="email" id="email-input" placeholder="Email" required>
                 <input type="password" id="signup-password" placeholder="Create Password" required>
                 <input type="password" id="signup-confirm-password" placeholder="Confirm Password" required>
                 <select id="signup-role">

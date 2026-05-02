@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BWRWSAI | Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <h2>BWRWSAI Admin</h2>
+        <div class="nav-links">
+            <a class="nav-item active" onclick="showSection('consumer-mgmt', this)">Consumer Management</a>
+            <a class="nav-item" onclick="showSection('system-config', this)">System Config</a>
+            <a class="nav-item" onclick="showSection('financials', this)">Financials</a>
+            <a href="../Signup/index.html" class="logout-link">Logout</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="content-header">
+            <h1 id="section-title">Consumer Management</h1>
+            <span id="date-now" style="color: var(--text-gray); font-size: 0.9rem;"></span>
+        </div>
+
+        <div id="consumer-mgmt" class="content-section active">
+            <div class="stats-grid">
+                <div class="stat-card"><h4>Total Consumers</h4><div id="stat-total" class="stat-value">0</div></div>
+                <div class="stat-card"><h4>Pending Readings</h4><div id="stat-pending" class="stat-value">0</div></div>
+                <div class="stat-card"><h4>Current Rate</h4><div id="stat-rate" class="stat-value">₱0.00</div></div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="adminSearch" class="search-input" placeholder="🔍 Search Masterlist by Dog Tag or Resident Name...">
+            </div>
+
+            <div class="grid-layout">
+                <div class="card">
+                    <h3>Register Consumer</h3>
+                    <label>Full Name</label>
+                    <input type="text" id="res-name" placeholder="Juan Dela Cruz">
+                    <label>Address / Zone</label>
+                    <input type="text" id="res-address" placeholder="Zone 4, Banaba West">
+                    <button class="btn-action" onclick="registerConsumer()">Add Resident</button>
+                </div>
+                
+                <div class="card">
+                    <h3>Masterlist</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Dog Tag</th>
+                                <th>Resident</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="master-list-body">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="system-config" class="content-section">
+            <div class="card" style="max-width: 500px;">
+                <h3>Configure Water Rates</h3>
+                <p style="color: var(--text-gray); font-size: 0.85rem; margin-bottom: 1.5rem;">Update the price per cubic meter (m³) for the entire system.</p>
+                
+                <label>Current System Rate</label>
+                <div id="current-rate-display" style="font-size: 1.5rem; font-weight: bold; color: var(--primary); margin-bottom: 1.5rem;">₱0.00 / m³</div>
+                
+                <label>Set New Rate (₱)</label>
+                <input type="number" id="rate-input" placeholder="e.g. 15.50">
+                <button class="btn-action" onclick="updateRate()">Update Rate</button>
+            </div>
+        </div>
+
+        <div id="financials" class="content-section">
+            <div class="card">
+                <h3>Collection Summary</h3>
+                <p style="color: var(--text-gray);">Financial reports and billing summaries will be generated here once consumer readings are active.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

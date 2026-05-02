@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookkeeper Dashboard - UtilityPay</title>
-    <link rel="stylesheet" href="style.css">
+    <title>BWRWSAI | Bookkeeper Dashboard</title>
+    <link rel="stylesheet" href="bookkeeper.css">
 </head>
-<body class="dashboard-body">
+<body>
 
     <nav class="navbar">
         <div class="logo">UtilityPay <span>Bookkeeper</span></div>
         <div class="nav-links">
             <a href="bookkeeper.html" class="active">Billing Logs</a>
             <a href="invoices-list.html">Invoices</a>
-            <a href="customers.html">Customers</a>
-            <a href="index.html" class="logout-link">Logout</a>
+            <a href="customer.html">Customers</a>
+            <a href="../Signup/index.html" class="logout-link">Logout</a>
         </div>
     </nav>
 
-    <main class="dashboard-container">
-        <header class="content-header">
+    <div class="dashboard-container">
+        <div class="content-header">
             <h1>Billing & Invoice Logs</h1>
             <button id="openModalBtn" class="submit-btn" style="width: auto; padding: 10px 20px;">+ Create New Bill</button>
-        </header>
+        </div>
 
         <div class="search-container">
-            <input type="text" id="logSearch" class="search-input" placeholder="🔍 Search by Resident ID (Dog Tag), Name, or Unit...">
+            <input type="text" id="logSearch" class="search-input" placeholder="🔍 Search by Resident ID, Name, or Unit...">
         </div>
 
         <div class="table-container">
@@ -49,39 +49,31 @@
                         <td>1450 m³</td>
                         <td>₱850.00</td>
                         <td><span class="status-paid">Paid</span></td>
-                        <td><button class="view-btn" onclick="viewInvoice('Juan Dela Cruz', '1450', '12.50', '850.00')">View</button></td>
+                        <td><button class="view-btn">View</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    </main>
+    </div>
 
     <div id="billModal" class="modal-overlay hidden">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2>Generate New Bill</h2>
-            </div>
+            <h2>Generate New Bill</h2>
             <form id="create-bill-form">
                 <div class="form-group">
-                    <label>Select Customer</label>
-                    <select id="bill-customer" required>
-                        <option value="Juan Dela Cruz">Juan Dela Cruz (DT-101)</option>
-                        <option value="Maria Clara">Maria Clara (DT-102)</option>
-                        <option value="Rizal Mercado">Rizal Mercado (DT-103)</option>
-                    </select>
+                    <label>Customer Name</label>
+                    <input type="text" id="bill-customer" placeholder="Enter Name" required>
                 </div>
                 <div class="form-group">
                     <label>Current Reading (m³)</label>
-                    <input type="number" id="bill-reading" required>
+                    <input type="number" id="bill-reading" placeholder="0" required>
                 </div>
                 <div class="form-group">
                     <label>Rate per m³ (₱)</label>
-                    <input type="number" id="bill-rate" value="12.50" step="0.01">
+                    <input type="number" id="bill-rate" value="12.50" required>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
-                    <button type="submit" class="submit-btn">Generate Invoice</button>
-                </div>
+                <button type="submit" class="submit-btn">Generate Invoice</button>
+                <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
             </form>
         </div>
     </div>

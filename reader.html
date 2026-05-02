@@ -3,111 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meter Reader Dashboard</title>
+    <title>BWRWSAI | Reader System</title>
     <style>
-        /* Mobile-First Styles */
+        :root {
+            --primary: #1e40af;
+            --accent: #3b82f6;
+            --bg: #f1f5f9;
+            --white: #ffffff;
+            --text: #1e293b;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #f3f4f6;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             margin: 0;
-            padding: 0;
-        }
-
-        .app-container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 15px;
-        }
-
-        header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #e5e7eb;
-            margin-bottom: 20px;
         }
 
-        .user-info { font-weight: bold; color: #374151; }
-
-        .logout-btn {
-            background: #fee2e2;
-            color: #ef4444;
-            border: none;
-            padding: 5px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .task-card {
-            background: white;
-            border-radius: 15px;
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 260px;
+            background: var(--primary);
+            color: white;
+            height: 100vh;
             padding: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            position: fixed;
         }
 
-        h2 { margin-top: 0; color: #111827; font-size: 1.2rem; }
+        .sidebar h2 { font-size: 1.2rem; margin-bottom: 30px; border-bottom: 1px solid #3b82f6; padding-bottom: 10px; }
         
-        .address { color: #6b7280; margin-bottom: 15px; display: block; }
-
-        .input-group { margin-bottom: 15px; }
-
-        label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #4b5563; }
-
-        input[type="number"] {
-            width: 100%;
+        .nav-item {
             padding: 12px;
-            border: 2px solid #d1d5db;
+            margin-bottom: 8px;
             border-radius: 8px;
-            font-size: 1.1rem;
-            box-sizing: border-box; /* Prevents input from overflowing */
+            font-size: 0.9rem;
+            background: var(--accent);
+            font-weight: bold;
         }
 
-        .submit-btn {
-            width: 100%;
-            background: #2563eb;
+        /* Main Content Area */
+        .main-content { margin-left: 280px; padding: 30px; width: calc(100% - 300px); }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .stat-card h4 { margin: 0; color: #64748b; font-size: 0.8rem; text-transform: uppercase; }
+        .stat-card p { margin: 10px 0 0; font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+
+        .section-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { text-align: left; background: #f8fafc; padding: 12px; font-size: 0.85rem; color: #64748b; }
+        td { padding: 15px 12px; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; }
+        
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; }
+        .bg-red { background: #fee2e2; color: #ef4444; }
+        .bg-green { background: #dcfce7; color: #22c55e; }
+
+        .btn-read {
+            background: var(--accent);
             color: white;
             border: none;
-            padding: 15px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 1rem;
+            padding: 8px 12px;
+            border-radius: 6px;
             cursor: pointer;
+            font-weight: bold;
         }
 
-        .submit-btn:active { background: #1d4ed8; transform: scale(0.98); }
+        /* Modal styling */
+        #reading-modal {
+            display: none; position: fixed; inset: 0; 
+            background: rgba(0,0,0,0.5); z-index: 100;
+            align-items: center; justify-content: center;
+        }
+        .modal-content {
+            background: white; padding: 30px; border-radius: 15px; width: 400px;
+        }
+        input { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        <header>
-            <span class="user-info">Reader: Lenard</span>
-            <button class="logout-btn" onclick="location.href='index.html'">Logout</button>
-        </header>
+<div class="sidebar">
+    <h2>BWRWSAI Reader</h2>
+    <div class="nav-item"> Staff Dashboard</div>
+    <p style="font-size: 0.7rem; color: #93c5fd; margin-top: 20px;">Logged in as:</p>
+    <p style="font-size: 0.85rem; font-weight: bold;">MJ Arienza</p>
+</div>
 
-        <div class="task-card">
-            <h2>Current Reading</h2>
-            <span class="address">📍 742 Evergreen Terrace</span>
-            
-            <div class="input-group">
-                <label>Previous: 1,240 kWh</label>
-                <input type="number" id="reading" placeholder="Enter current digits">
-            </div>
+<div class="main-content">
+    <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h1 style="font-size: 1.5rem;"> Billing & Metering</h1>
+        <span id="date-now" style="color: #64748b;"></span>
+    </header>
 
-            <button class="submit-btn" onclick="submitData()">Submit to Bookkeeper</button>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h4>Assigned Area</h4>
+            <p>Banaba West</p>
+        </div>
+        <div class="stat-card">
+            <h4>System Rate</h4>
+            <p id="display-rate">₱0.00 / m³</p>
         </div>
     </div>
 
-    <script>
-        function submitData() {
-            const val = document.getElementById('reading').value;
-            if(!val) return alert("Please enter a reading!");
-            
-            alert("Reading submitted: " + val + " kWh. Sending to Bookkeeper...");
-            // Logic for storage will go here
-        }
-    </script>
+    <div class="section-card">
+        <h3> Pending Meter Readings</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Resident / Address</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="reader-list-body"></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="reading-modal">
+    <div class="modal-content">
+        <h3 id="target-name" style="margin-top: 0;">Input Reading</h3>
+        <label style="font-size: 0.85rem; color: gray;">Current Meter Digits (m³)</label>
+        <input type="number" id="meter-input" placeholder="0000.0">
+        <button class="btn-read" style="width: 100%; padding: 15px;" onclick="saveReading()">Confirm & Submit</button>
+        <button onclick="closeModal()" style="width: 100%; background: none; border: none; margin-top: 10px; color: gray; cursor: pointer;">Cancel</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById('date-now').innerText = new Date().toDateString();
+    let selectedId = null;
+    let rate = parseFloat(localStorage.getItem('bwrwsai_rate')) || 10;
+    document.getElementById('display-rate').innerText = `₱${rate} / m³`;
+
+    function loadReaderList() {
+        const data = JSON.parse(localStorage.getItem('bwrwsai_data')) || [];
+        const tbody = document.getElementById('reader-list-body');
+        tbody.innerHTML = '';
+
+        data.forEach(r => {
+            const isDone = r.status === 'completed';
+            tbody.innerHTML += `
+                <tr>
+                    <td><b>${r.name}</b><br><small style="color:gray;">${r.address}</small></td>
+                    <td><span class="badge ${isDone ? 'bg-green' : 'bg-red'}">${isDone ? 'DONE' : 'PENDING'}</span></td>
+                    <td>
+                        ${isDone ? `<span style="font-size:0.8rem; color:var(--accent);">₱${r.total_bill}</span>` : 
+                        `<button class="btn-read" onclick="openModal(${r.id}, '${r.name}')">Enter Reading</button>`}
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+    function openModal(id, name) {
+        selectedId = id;
+        document.getElementById('target-name').innerText = name;
+        document.getElementById('reading-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('reading-modal').style.display = 'none';
+        document.getElementById('meter-input').value = '';
+    }
+
+    function saveReading() {
+        const val = document.getElementById('meter-input').value;
+        if(!val) return alert("Please enter the reading");
+
+        const totalBill = (parseFloat(val) * rate).toFixed(2);
+        let data = JSON.parse(localStorage.getItem('bwrwsai_data'));
+
+        data = data.map(r => {
+            if(r.id === selectedId) {
+                return { ...r, status: 'completed', reading: val, total_bill: totalBill };
+            }
+            return r;
+        });
+
+        localStorage.setItem('bwrwsai_data', JSON.stringify(data));
+        alert(`Reading submitted successfully! Total: ₱${totalBill}`);
+        closeModal();
+        loadReaderList();
+    }
+
+    loadReaderList();
+</script>
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Directory - UtilityPay</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bookkeeper.css">
 </head>
 <body class="dashboard-body">
 
@@ -13,8 +13,8 @@
         <div class="nav-links">
             <a href="bookkeeper.html">Billing Logs</a>
             <a href="invoices-list.html">Invoices</a>
-            <a href="customers.html" class="active">Customers</a>
-            <a href="index.html" class="logout-link">Logout</a>
+            <a href="customer.html" class="active">Customers</a>
+            <a href="../Signup/index.html" class="logout-link">Logout</a>
         </div>
     </nav>
 
@@ -59,10 +59,8 @@
                 <div class="form-group"><label>Full Name</label><input type="text" id="n" required></div>
                 <div class="form-group"><label>Unit #</label><input type="text" id="u" required></div>
                 <div class="form-group"><label>Dog Tag ID</label><input type="text" id="d" placeholder="e.g. DT-105" required></div>
-                <div class="modal-footer">
-                    <button type="button" class="cancel-btn" id="closeC">Cancel</button>
-                    <button type="submit" class="submit-btn">Save</button>
-                </div>
+                <button type="submit" class="submit-btn">Save</button>
+                <button type="button" class="cancel-btn" id="closeC">Cancel</button>
             </form>
         </div>
     </div>
@@ -70,18 +68,13 @@
     <script>
         const modal = document.getElementById('custModal');
         const search = document.getElementById('custSearch');
-        
-        // Search
         search.onkeyup = () => {
             const filter = search.value.toLowerCase();
             const rows = document.querySelectorAll('#customer-table-body tr');
             rows.forEach(r => r.style.display = r.textContent.toLowerCase().includes(filter) ? '' : 'none');
         };
-
-        // Modal Logic
         document.getElementById('addCustBtn').onclick = () => modal.classList.remove('hidden');
         document.getElementById('closeC').onclick = () => modal.classList.add('hidden');
-        
         document.getElementById('add-cust-form').onsubmit = (e) => {
             e.preventDefault();
             const name = document.getElementById('n').value;
@@ -91,6 +84,7 @@
             row.innerHTML = `<td><span class="dog-tag">${tag}</span></td><td>${unit}</td><td>${name}</td><td>N/A</td><td><button class="view-btn">Edit</button></td>`;
             document.getElementById('customer-table-body').prepend(row);
             modal.classList.add('hidden');
+            e.target.reset();
         };
     </script>
 </body>
