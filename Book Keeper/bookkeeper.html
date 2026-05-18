@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BWRWSAI | Bookkeeper Dashboard</title>
+    <title>UtilityPay | Billing Logs</title>
     <link rel="stylesheet" href="bookkeeper.css">
 </head>
 <body>
@@ -11,24 +11,41 @@
     <nav class="navbar">
         <div class="logo">UtilityPay <span>Bookkeeper</span></div>
         <div class="nav-links">
-            <a href="bookkeeper.html" class="active">Billing Logs</a>
-            <a href="invoices-list.html">Invoices</a>
-            <a href="customer.html">Customers</a>
+            <a href="bookkeeper.html" class="nav-item active">Billing Logs</a>
+            <a href="invoices-list.html" class="nav-item">Invoices</a>
+            <a href="customer.html" class="nav-item">Customers</a>
             <a href="../Signup/index.html" class="logout-link">Logout</a>
         </div>
     </nav>
 
-    <div class="dashboard-container">
+    <div class="main-content">
         <div class="content-header">
             <h1>Billing & Invoice Logs</h1>
-            <button id="openModalBtn" class="submit-btn" style="width: auto; padding: 10px 20px;">+ Create New Bill</button>
+            <span id="date-now" style="color: var(--text-gray); font-size: 0.9rem;"></span>
         </div>
 
-        <div class="search-container">
-            <input type="text" id="logSearch" class="search-input" placeholder="🔍 Search by Resident ID, Name, or Unit...">
+        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
+            <div class="card" style="margin-bottom: 0;">
+                <h4 style="margin:0; color: var(--text-gray); font-size: 0.75rem; text-transform: uppercase;">Total Collected</h4>
+                <div id="stat-collected" style="font-size: 1.8rem; font-weight: 700; color: #2563eb; margin-top: 8px;">₱0.00</div>
+            </div>
+            <div class="card" style="margin-bottom: 0;">
+                <h4 style="margin:0; color: var(--text-gray); font-size: 0.75rem; text-transform: uppercase;">Unpaid Bills</h4>
+                <div id="stat-unpaid" style="font-size: 1.8rem; font-weight: 700; color: #ef4444; margin-top: 8px;">0</div>
+            </div>
+            <div class="card" style="margin-bottom: 0;">
+                <h4 style="margin:0; color: var(--text-gray); font-size: 0.75rem; text-transform: uppercase;">Active Connections</h4>
+                <div id="stat-active" style="font-size: 1.8rem; font-weight: 700; color: #22c55e; margin-top: 8px;">1</div>
+            </div>
         </div>
 
-        <div class="table-container">
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 15px;">
+                <input type="text" id="billSearch" class="search-input" style="flex-grow: 1; margin-bottom: 0;" placeholder="🔍 Search by Dog Tag, Name, or Unit...">
+                <button id="createNewBill" class="btn-action" style="white-space: nowrap;">+ Create New Bill</button>
+            </div>
+
+            <h3 style="margin-bottom: 15px;">Billing Masterlist</h3>
             <table>
                 <thead>
                     <tr>
@@ -41,15 +58,15 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody id="billing-table-body">
+                <tbody id="billing-log-body">
                     <tr>
                         <td><span class="dog-tag">DT-101</span></td>
                         <td>2024-03-15</td>
                         <td>Juan Dela Cruz</td>
                         <td>1450 m³</td>
                         <td>₱850.00</td>
-                        <td><span class="status-paid">Paid</span></td>
-                        <td><button class="view-btn">View</button></td>
+                        <td><span style="color: #22c55e; font-weight: bold;">Paid</span></td>
+                        <td><button class="view-btn action-view" data-id="DT-101">View</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -58,22 +75,12 @@
 
     <div id="billModal" class="modal-overlay hidden">
         <div class="modal-content">
-            <h2>Generate New Bill</h2>
-            <form id="create-bill-form">
-                <div class="form-group">
-                    <label>Customer Name</label>
-                    <input type="text" id="bill-customer" placeholder="Enter Name" required>
-                </div>
-                <div class="form-group">
-                    <label>Current Reading (m³)</label>
-                    <input type="number" id="bill-reading" placeholder="0" required>
-                </div>
-                <div class="form-group">
-                    <label>Rate per m³ (₱)</label>
-                    <input type="number" id="bill-rate" value="12.50" required>
-                </div>
-                <button type="submit" class="submit-btn">Generate Invoice</button>
-                <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+            <h2>Create New Bill</h2>
+            <form id="new-bill-form">
+                <div class="form-group"><label>Dog Tag</label><input type="text" id="billTag" required></div>
+                <div class="form-group"><label>Current Reading (m³)</label><input type="number" id="billReading" required></div>
+                <button type="submit" class="btn-action" style="width: 100%;">Generate Bill</button>
+                <button type="button" id="closeBillModal" class="cancel-btn" style="width: 100%; margin-top: 10px;">Cancel</button>
             </form>
         </div>
     </div>

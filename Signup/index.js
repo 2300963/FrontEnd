@@ -28,7 +28,8 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
         window.location.href = "../Admin/admin.html";
     } else if (role === 'bookkeeper') {
         window.location.href = "../Book Keeper/bookkeeper.html";
-    } else {
-        window.location.href = "../reader.html"; // reader.html is in the root
+    } else if (role === 'reader') { 
+        // FIX: Go UP one level to find reader.html in the main APP DEV folder
+        window.location.href = "../reader/reader.html";
     }
 });

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BWRWSAI | Reader Dashboard</title>
+    <link rel="stylesheet" href="reader.css">
+</head>
+<body class="dashboard-body">
+
+    <nav class="navbar">
+        <div class="logo">BWRWSAI <span>Reader</span></div>
+        <div class="nav-links">
+            <a href="#" class="active">Meter Reading</a>
+            <a href="#" onclick="openSettingsModal()">Account Settings</a>
+            <a href="../Signup/index.html" class="logout-link">Logout</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-container">
+        <header class="content-header">
+            <div>
+                <h1>Billing & Metering</h1>
+                <p class="subtitle">Manage water consumption for <b>Banaba West</b></p>
+            </div>
+            <div class="date-display" id="date-now"></div>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <label>Assigned Zone</label>
+                <div class="stat-value">Zone 8</div>
+            </div>
+            <div class="stat-card">
+                <label>Current Water Rate</label>
+                <div id="display-rate" class="stat-value">₱0.00 / m³</div>
+            </div>
+        </div>
+
+        <section class="masterlist-container">
+            <div class="search-bar-container">
+                <input type="text" id="search-input" class="search-input" placeholder="🔍 Search resident or serial..." onkeyup="filterTable()">
+            </div>
+            
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Resident / Serial</th>
+                            <th>Status</th>
+                            <th>Connection</th>
+                            <th>Current Billing</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reader-list-body"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div id="settings-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3>Account Management</h3>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="edit-name">
+            </div>
+            <div class="form-group">
+                <label>Profile Picture</label>
+                <input type="file" id="edit-photo-file" accept="image/*">
+            </div>
+            <button class="submit-btn" onclick="saveAccountSettings()">Update Profile</button>
+            <button class="cancel-btn" onclick="closeSettingsModal()">Cancel</button>
+        </div>
+    </div>
+
+    <div id="reading-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3>Input Meter Reading</h3>
+            <p id="target-name" style="font-weight: bold; color: #2563eb; margin-bottom: 15px;"></p>
+            <div class="form-group">
+                <label>Current Reading (m³)</label>
+                <input type="number" id="meter-input" placeholder="0.00">
+            </div>
+            <button class="submit-btn" onclick="saveReading()">Submit Reading</button>
+            <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="reader.js"></script>
+</body>
+</html>

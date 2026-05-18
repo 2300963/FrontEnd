@@ -6,47 +6,53 @@
     <title>Invoice - UtilityPay</title>
     <link rel="stylesheet" href="bookkeeper.css">
     <style>
-        .invoice-box { background: white; padding: 40px; border: 1px solid #eee; max-width: 800px; margin: 2rem auto; border-radius: 8px; }
-        .inv-header { display: flex; justify-content: space-between; border-bottom: 2px solid #2563eb; padding-bottom: 20px; margin-bottom: 20px; }
-        @media print { .no-print { display: none; } .invoice-box { border: none; box-shadow: none; margin: 0; padding: 0; } }
+        .invoice-box { background: white; padding: 40px; border: 1px solid #e2e8f0; max-width: 800px; margin: 2rem auto; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .inv-header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--primary); padding-bottom: 20px; margin-bottom: 20px; }
+        @media print { .no-print { display: none !important; } .invoice-box { border: none; box-shadow: none; margin: 0; padding: 0; width: 100%; } body { background: white; } }
     </style>
 </head>
-<body class="dashboard-body">
+<body>
     <nav class="navbar no-print">
         <div class="logo">UtilityPay</div>
-        <div class="nav-links"><a href="bookkeeper.html">Back to Logs</a></div>
+        <div class="nav-links"><a href="bookkeeper.html" class="nav-item">Back to Logs</a></div>
     </nav>
     
     <div class="invoice-box">
         <div class="inv-header">
             <div>
-                <h1 style="margin:0; color:#2563eb;">INVOICE</h1>
-                <p style="margin:5px 0;">Ms. Merlyn's Services</p>
+                <h1 style="margin:0; color:var(--primary);">INVOICE</h1>
+                <p style="margin:5px 0; color: var(--text-gray);">Ms. Merlyn's Services</p>
             </div>
             <div style="text-align: right;">
                 <p><strong>Date:</strong> <span id="dt"></span></p>
             </div>
         </div>
-        <h3>Billed To: <span id="cn"></span></h3>
-        <table style="width:100%; border-collapse:collapse; margin-top:20px;">
-            <thead style="background:#f1f5f9;">
+        
+        <h3 style="margin-bottom: 30px;">Billed To: <span id="cn" style="color: var(--primary);"></span></h3>
+        
+        <table>
+            <thead style="background: #f8fafc;">
                 <tr>
-                    <th style="padding:12px; text-align:left;">Usage</th>
-                    <th style="padding:12px; text-align:left;">Reading</th>
-                    <th style="padding:12px; text-align:left;">Rate</th>
-                    <th style="padding:12px; text-align:left;">Total</th>
+                    <th>Usage</th>
+                    <th>Reading</th>
+                    <th>Rate</th>
+                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td style="padding:12px; border-bottom:1px solid #eee;">Water Service</td>
-                    <td style="padding:12px; border-bottom:1px solid #eee;" id="rd"></td>
-                    <td style="padding:12px; border-bottom:1px solid #eee;" id="rt"></td>
-                    <td style="padding:12px; border-bottom:1px solid #eee;" id="tt"></td>
+                    <td style="border-bottom: 1px solid #eee;">Water Service</td>
+                    <td style="border-bottom: 1px solid #eee;" id="rd"></td>
+                    <td style="border-bottom: 1px solid #eee;" id="rt"></td>
+                    <td style="border-bottom: 1px solid #eee; font-weight: bold; color: var(--primary);" id="tt"></td>
                 </tr>
             </tbody>
         </table>
-        <h2 style="text-align:right; margin-top:30px;">Total Amount: <span id="ft" style="color:#2563eb;"></span></h2>
+        
+        <div style="text-align: right; margin-top: 40px;">
+            <p style="color: var(--text-gray); margin-bottom: 5px;">Total Amount Due</p>
+            <h2 style="margin:0; color: var(--primary);"><span id="ft"></span></h2>
+        </div>
     </div>
     
     <div style="text-align:center; margin-bottom: 50px;" class="no-print">
